@@ -9,8 +9,7 @@ import javax.persistence.Table;
 
 @Builder
 @Getter
-@Setter
-@Table(name = "user")
+@Table
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

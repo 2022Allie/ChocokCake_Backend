@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Builder
 @Getter
 @Setter
-@Table(name = "candle")
+@Table
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
