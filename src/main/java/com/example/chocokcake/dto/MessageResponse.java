@@ -6,5 +6,5 @@ import lombok.Getter;
 @Builder
 @Getter
 public class MessageResponse {
-    private final String massage;
+    private final String message;
 }

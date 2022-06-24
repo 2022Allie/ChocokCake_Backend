@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Builder
 @Getter
@@ -23,5 +24,5 @@ public class User {
     @Column(name = "password")
     private String password;
     @Column(name = "birth_day")
-    private String birthDay;
+    private Date birthDay;
 }
