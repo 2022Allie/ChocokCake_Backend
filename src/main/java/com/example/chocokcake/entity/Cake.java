@@ -24,5 +24,5 @@ public class Cake {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User userId;
+    private User user;
 }
