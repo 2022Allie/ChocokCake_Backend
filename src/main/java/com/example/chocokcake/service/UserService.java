@@ -1,11 +1,14 @@
 package com.example.chocokcake.service;
 
+import com.example.chocokcake.dto.LoginRequest;
 import com.example.chocokcake.dto.MessageResponse;
+import com.example.chocokcake.dto.TokenResponse;
 import com.example.chocokcake.dto.UserRequest;
 import com.example.chocokcake.entity.User;
 import com.example.chocokcake.entity.UserRepository;
 import com.example.chocokcake.exception.BaseException;
 import com.example.chocokcake.exception.ErrorCode;
+import com.example.chocokcake.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,7 @@ import javax.transaction.Transactional;
 @Service
 @RequiredArgsConstructor
 public class UserService {
+    private final JwtTokenProvider jwtTokenProvider;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private final UserRepository userRepository;
     @Transactional
@@ -36,5 +40,17 @@ public class UserService {
                 .ifPresent(m -> {
                     throw new BaseException(ErrorCode.DUPLICATE_MEMBER);
                 });
+    }
+
+    public TokenResponse login(LoginRequest request) {
+        User user = userRepository.findByAccountId(request.getAccountId())
+                .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND_USER));
+
+        if(!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new BaseException(ErrorCode.PASSWORD_NOT_MATCHED);
+        }
+        return TokenResponse.builder()
+                .accessToken(jwtTokenProvider.generateAccessToken(request.getAccountId()))
+                .build();
     }
 }
