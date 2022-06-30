@@ -2,10 +2,7 @@ package com.example.chocokcake.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Builder
 @Getter
@@ -16,6 +13,7 @@ import javax.persistence.Table;
 @Entity
 public class Candle {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "theme")
     private Long theme;
