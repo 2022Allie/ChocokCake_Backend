@@ -30,5 +30,5 @@ public class User {
     private Date birthDay;
 
     @OneToMany(mappedBy = "user_id")
-    private List<Cake> userList;
+    private List<Cake> cakeList;
 }
