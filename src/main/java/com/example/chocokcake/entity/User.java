@@ -30,9 +30,5 @@ public class User {
     private Date birthDay;
 
     @OneToMany(mappedBy = "user_id")
-<<<<<<< HEAD
     private List<Cake> userList;
-=======
-    private List<User> userList;
->>>>>>> 15-user-cake-mapping
 }
