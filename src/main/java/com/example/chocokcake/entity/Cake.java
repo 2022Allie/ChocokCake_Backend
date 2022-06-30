@@ -24,5 +24,5 @@ public class Cake {
     private String brithDay;
 
     @OneToMany(mappedBy = "cake_id")
-    private List<Candle> cakeList;
+    private List<Candle> candleList;
 }
