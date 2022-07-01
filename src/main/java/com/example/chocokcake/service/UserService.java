@@ -9,6 +9,7 @@ import com.example.chocokcake.entity.repository.UserRepository;
 import com.example.chocokcake.exception.BaseException;
 import com.example.chocokcake.exception.ErrorCode;
 import com.example.chocokcake.security.JwtTokenProvider;
+import com.example.chocokcake.security.auth.AuthenticationFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ public class UserService {
     private final JwtTokenProvider jwtTokenProvider;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private final UserRepository userRepository;
+    private final AuthenticationFacade authenticationFacade;
     @Transactional
     public MessageResponse join(UserRequest request) {
         duplicateMemberVerification(request.getAccountId());
@@ -28,7 +30,7 @@ public class UserService {
                 .accountId(request.getAccountId())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .name(request.getName())
-                .birthDay(request.getBirthDay())
+                .birthDay(authenticationFacade.getBirthDay(request.getMonthOfBirthDay(), request.getDayOfBirthDay()))
                 .build();
         userRepository.save(user);
         return MessageResponse.builder()

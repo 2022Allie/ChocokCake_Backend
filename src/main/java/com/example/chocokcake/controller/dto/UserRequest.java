@@ -16,5 +16,6 @@ public class UserRequest {
     private String accountId;
     private String password;
     private String name;
-    private LocalDate birthDay;
+    private Integer monthOfBirthDay;
+    private Integer dayOfBirthDay;
 }
