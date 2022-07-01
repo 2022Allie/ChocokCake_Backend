@@ -1,6 +1,6 @@
 package com.example.chocokcake.security.auth;
 
-import com.example.chocokcake.entity.UserRepository;
+import com.example.chocokcake.entity.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
