@@ -1,11 +1,11 @@
 package com.example.chocokcake.service;
 
-import com.example.chocokcake.dto.LoginRequest;
-import com.example.chocokcake.dto.MessageResponse;
-import com.example.chocokcake.dto.TokenResponse;
-import com.example.chocokcake.dto.UserRequest;
+import com.example.chocokcake.controller.dto.LoginRequest;
+import com.example.chocokcake.controller.dto.MessageResponse;
+import com.example.chocokcake.controller.dto.TokenResponse;
+import com.example.chocokcake.controller.dto.UserRequest;
 import com.example.chocokcake.entity.User;
-import com.example.chocokcake.entity.UserRepository;
+import com.example.chocokcake.entity.repository.UserRepository;
 import com.example.chocokcake.exception.BaseException;
 import com.example.chocokcake.exception.ErrorCode;
 import com.example.chocokcake.security.JwtTokenProvider;

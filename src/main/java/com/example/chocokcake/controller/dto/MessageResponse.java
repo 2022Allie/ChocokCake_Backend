@@ -1,4 +1,4 @@
-package com.example.chocokcake.dto;
+package com.example.chocokcake.controller.dto;
 
 import lombok.Builder;
 import lombok.Getter;
