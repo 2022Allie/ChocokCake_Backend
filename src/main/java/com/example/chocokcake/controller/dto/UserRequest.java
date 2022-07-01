@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Builder
@@ -15,5 +16,5 @@ public class UserRequest {
     private String accountId;
     private String password;
     private String name;
-    private Date birthDay;
+    private LocalDate birthDay;
 }

@@ -45,7 +45,6 @@ public class UserService {
     public TokenResponse login(LoginRequest request) {
         User user = userRepository.findByAccountId(request.getAccountId())
                 .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND_USER));
-
         if(!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new BaseException(ErrorCode.PASSWORD_NOT_MATCHED);
         }

@@ -1,12 +1,8 @@
 package com.example.chocokcake.controller;
 
-<<<<<<< main
 import com.example.chocokcake.controller.dto.LoginRequest;
 import com.example.chocokcake.controller.dto.MessageResponse;
 import com.example.chocokcake.controller.dto.TokenResponse;
-=======
-import com.example.chocokcake.controller.dto.MessageResponse;
->>>>>>> Create Cake API
 import com.example.chocokcake.controller.dto.UserRequest;
 import com.example.chocokcake.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +22,7 @@ public class UserController {
         return userService.join(request);
     }
     @PostMapping("/account/login")
-    public TokenResponse login(LoginRequest request){
+    public TokenResponse login(@RequestBody LoginRequest request){
         return userService.login(request);
     }
 }

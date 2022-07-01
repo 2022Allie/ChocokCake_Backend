@@ -1,12 +1,11 @@
 package com.example.chocokcake.controller.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Builder
 @Getter
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class ThemeRequest {
-    private final Long theme;
+    private Long theme;
 }

@@ -3,6 +3,7 @@ package com.example.chocokcake.service;
 import com.example.chocokcake.controller.dto.MessageResponse;
 import com.example.chocokcake.controller.dto.ThemeRequest;
 import com.example.chocokcake.entity.Cake;
+import com.example.chocokcake.entity.User;
 import com.example.chocokcake.entity.repository.CakeRepository;
 import com.example.chocokcake.security.auth.AuthenticationFacade;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +18,11 @@ public class CakeService {
     private final AuthenticationFacade authenticationFacade;
     @Transactional
     public MessageResponse createCake(ThemeRequest theme){
+        User user = authenticationFacade.getCurrentUser();
         cakeRepository.save(Cake.builder()
                 .theme(theme.getTheme())
-                .user(authenticationFacade.getCurrentUser())
+                .brithDay(user.getBirthDay())
+                .user(user)
                 .build());
         return MessageResponse.builder()
                 .message("케이크가 생성되었습니다." )

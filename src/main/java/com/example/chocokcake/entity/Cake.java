@@ -3,6 +3,7 @@ package com.example.chocokcake.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Builder
@@ -21,7 +22,7 @@ public class Cake {
     private Long theme;
 
     @Column(name = "birth_day")
-    private String brithDay;
+    private LocalDate brithDay;
 
     @OneToMany(mappedBy = "cake")
     private List<Candle> candleList;
