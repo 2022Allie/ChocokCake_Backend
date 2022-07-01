@@ -23,6 +23,10 @@ public class Cake {
     @Column(name = "birth_day")
     private String brithDay;
 
+<<<<<<< HEAD
     @OneToMany(mappedBy = "cake")
+=======
+    @OneToMany(mappedBy = "cake_id")
+>>>>>>> 16-cake-candle-mapping
     private List<Candle> candleList;
 }

@@ -27,5 +27,9 @@ public class Candle {
 
     @ManyToOne
     @JoinColumn(name = "cake_id")
+<<<<<<< HEAD
     private Cake cake;
+=======
+    private Cake cakeId;
+>>>>>>> 16-cake-candle-mapping
 }
