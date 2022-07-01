@@ -21,11 +21,7 @@ public class CakeService {
                 .user(authenticationFacade.getCurrentUser())
                 .build());
         return MessageResponse.builder()
-<<<<<<< HEAD
                 .message("케이크가 생성되었습니다." )
-=======
-                .message(authenticationFacade.getCurrentUser() + "님의 케이크가 " + theme + "맛으로 생성되었습니다." )
->>>>>>> 18-create-cake-api
                 .build();
     }
 }
