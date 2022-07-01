@@ -25,4 +25,8 @@ public class Cake {
 
     @OneToMany(mappedBy = "cake")
     private List<Candle> candleList;
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
