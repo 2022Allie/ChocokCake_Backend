@@ -23,6 +23,6 @@ public class Cake {
     @Column(name = "birth_day")
     private String brithDay;
 
-    @OneToMany(mappedBy = "cake_id")
+    @OneToMany(mappedBy = "cake")
     private List<Candle> candleList;
 }

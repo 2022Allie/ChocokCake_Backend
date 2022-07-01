@@ -27,5 +27,5 @@ public class Candle {
 
     @ManyToOne
     @JoinColumn(name = "cake_id")
-    private Cake cakeId;
+    private Cake cake;
 }
