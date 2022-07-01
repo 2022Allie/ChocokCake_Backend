@@ -1,6 +1,7 @@
 package com.example.chocokcake.controller;
 
 import com.example.chocokcake.controller.dto.MessageResponse;
+import com.example.chocokcake.controller.dto.ReadCakeDetailsResponse;
 import com.example.chocokcake.controller.dto.ReadUserCakeResponse;
 import com.example.chocokcake.controller.dto.ThemeRequest;
 import com.example.chocokcake.service.CakeService;
@@ -21,5 +22,10 @@ public class CakeController {
     @GetMapping("/cake/mine")
     public ReadUserCakeResponse readMyCake() {
         return cakeService.readMyCake();
+    }
+
+    @GetMapping("/cake/{cake-id}")
+    public ReadCakeDetailsResponse readCakeDetails(@PathVariable("cake-id") Long cakeId) {
+        return cakeService.readCakeDetails(cakeId);
     }
 }
