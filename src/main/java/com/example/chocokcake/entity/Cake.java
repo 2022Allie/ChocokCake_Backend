@@ -3,6 +3,7 @@ package com.example.chocokcake.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Builder
 @Getter
@@ -22,6 +23,9 @@ public class Cake {
     @Column(name = "birth_day")
     private String brithDay;
 
+    @OneToMany(mappedBy = "cake")
+    private List<Candle> candleList;
+    
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

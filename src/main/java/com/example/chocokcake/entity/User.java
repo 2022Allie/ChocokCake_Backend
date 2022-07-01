@@ -28,7 +28,7 @@ public class User {
 
     @Column(name = "birth_day")
     private Date birthDay;
-
+    
     @OneToMany(mappedBy = "user")
     private List<Cake> cakeList;
 }
