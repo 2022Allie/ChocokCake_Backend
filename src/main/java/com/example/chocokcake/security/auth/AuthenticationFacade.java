@@ -9,6 +9,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Component
 @RequiredArgsConstructor
 public class AuthenticationFacade {
@@ -18,5 +20,12 @@ public class AuthenticationFacade {
         AuthDetails authDetails = (AuthDetails) authentication.getPrincipal();
         return userRepository.findByAccountId(authDetails.getUsername())
                 .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND_USER));
+    }
+    public LocalDate getBirthDay(Integer month, Integer day){
+        LocalDate birthDay = LocalDate.of(LocalDate.now().getYear(), month, day);
+        if (birthDay.isBefore(LocalDate.now())) {
+            birthDay = birthDay.plusYears(1);
+        }
+        return birthDay;
     }
 }
