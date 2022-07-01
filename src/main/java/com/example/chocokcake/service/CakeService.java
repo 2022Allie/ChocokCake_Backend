@@ -1,10 +1,14 @@
 package com.example.chocokcake.service;
 
 import com.example.chocokcake.controller.dto.MessageResponse;
+import com.example.chocokcake.controller.dto.ReadCakeDetailsResponse;
+import com.example.chocokcake.controller.dto.ReadUserCakeResponse;
 import com.example.chocokcake.controller.dto.ThemeRequest;
 import com.example.chocokcake.entity.Cake;
 import com.example.chocokcake.entity.User;
 import com.example.chocokcake.entity.repository.CakeRepository;
+import com.example.chocokcake.exception.BaseException;
+import com.example.chocokcake.exception.ErrorCode;
 import com.example.chocokcake.security.auth.AuthenticationFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,6 +30,31 @@ public class CakeService {
                 .build());
         return MessageResponse.builder()
                 .message("케이크가 생성되었습니다." )
+                .build();
+    }
+
+    @Transactional
+    public ReadUserCakeResponse readMyCake() {
+        User user = authenticationFacade.getCurrentUser();
+
+        Cake cake = cakeRepository.findByUserOrderByBrithDayDesc(user);
+        return ReadUserCakeResponse.builder()
+                .id(cake.getId())
+                .birthDay(cake.getBrithDay())
+                .userName(user.getName())
+                .theme(cake.getTheme())
+                .build();
+    }
+
+    @Transactional
+    public ReadCakeDetailsResponse readCakeDetails(Long cakeId) {
+        Cake cake = cakeRepository.findById(cakeId)
+         .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND_CAKE));
+        return ReadCakeDetailsResponse.builder()
+                .id(cake.getId())
+                .birthDay(cake.getBrithDay())
+                .userName(cake.getUser().getName())
+                .theme(cake.getTheme())
                 .build();
     }
 }

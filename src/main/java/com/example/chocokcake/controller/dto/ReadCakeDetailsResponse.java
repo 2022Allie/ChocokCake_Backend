@@ -6,16 +6,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Builder
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
-public class UserRequest {
-    private String accountId;
-    private String password;
-    private String name;
-    private Integer monthOfBirthDay;
-    private Integer dayOfBirthDay;
+@NoArgsConstructor
+public class ReadCakeDetailsResponse {
+    private Long id;
+
+    private Long theme;
+
+    private LocalDate birthDay;
+
+    private String userName;
 }
