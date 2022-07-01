@@ -29,8 +29,9 @@ public class JwtTokenProvider {
     }
     public String getUserId(String token){
         try{
-            return Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJwt(token).getBody().getSubject();
+            return Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token).getBody().getSubject();
         }catch (Exception e){
+            e.printStackTrace();
             throw new RuntimeException();
         }
     }

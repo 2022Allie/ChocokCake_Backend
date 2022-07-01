@@ -3,6 +3,7 @@ package com.example.chocokcake.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class User {
     private String password;
 
     @Column(name = "birth_day")
-    private Date birthDay;
+    private LocalDate birthDay;
     
     @OneToMany(mappedBy = "user")
     private List<Cake> cakeList;

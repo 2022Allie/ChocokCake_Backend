@@ -22,7 +22,7 @@ public class UserController {
         return userService.join(request);
     }
     @PostMapping("/account/login")
-    public TokenResponse login(LoginRequest request){
+    public TokenResponse login(@RequestBody LoginRequest request){
         return userService.login(request);
     }
 }
