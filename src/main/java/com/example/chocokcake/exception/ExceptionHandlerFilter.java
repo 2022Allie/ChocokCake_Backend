@@ -1,6 +1,7 @@
 package com.example.chocokcake.exception;
 
 import com.example.chocokcake.controller.dto.ErrorResponse;
+import io.jsonwebtoken.MalformedJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -36,7 +37,6 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
             log.error("exception exception handler filter");
             setErrorResponse(ErrorCode.UN_AUTHORIZED_TOKEN_EXCEPTION, response, e);
         } catch (RuntimeException e){
-            e.printStackTrace();
             log.error("runtime exception exception handler filter");
             setErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR, response, e);
         }
