@@ -18,17 +18,11 @@ public class CakeService {
     private final AuthenticationFacade authenticationFacade;
     @Transactional
     public MessageResponse createCake(ThemeRequest theme){
-<<<<<<< HEAD
         User user = authenticationFacade.getCurrentUser();
         cakeRepository.save(Cake.builder()
                 .theme(theme.getTheme())
                 .brithDay(user.getBirthDay())
                 .user(user)
-=======
-        cakeRepository.save(Cake.builder()
-                .theme(theme.getTheme())
-                .user(authenticationFacade.getCurrentUser())
->>>>>>> 18-create-cake-api
                 .build());
         return MessageResponse.builder()
                 .message("케이크가 생성되었습니다." )
