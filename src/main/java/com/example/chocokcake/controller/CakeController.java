@@ -1,14 +1,12 @@
 package com.example.chocokcake.controller;
 
 import com.example.chocokcake.controller.dto.MessageResponse;
+import com.example.chocokcake.controller.dto.ReadUserCakeResponse;
 import com.example.chocokcake.controller.dto.ThemeRequest;
 import com.example.chocokcake.service.CakeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,5 +16,10 @@ public class CakeController {
     @ResponseStatus(value = HttpStatus.CREATED)
     public MessageResponse createCake(@RequestBody ThemeRequest theme){
         return cakeService.createCake(theme);
+    }
+
+    @GetMapping("/cake/mine")
+    public ReadUserCakeResponse readMyCake() {
+        return cakeService.readMyCake();
     }
 }
