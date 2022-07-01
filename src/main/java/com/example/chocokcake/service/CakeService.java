@@ -1,6 +1,7 @@
 package com.example.chocokcake.service;
 
 import com.example.chocokcake.controller.dto.MessageResponse;
+import com.example.chocokcake.controller.dto.ReadUserCakeResponse;
 import com.example.chocokcake.controller.dto.ThemeRequest;
 import com.example.chocokcake.entity.Cake;
 import com.example.chocokcake.entity.User;
@@ -26,6 +27,19 @@ public class CakeService {
                 .build());
         return MessageResponse.builder()
                 .message("케이크가 생성되었습니다." )
+                .build();
+    }
+
+    @Transactional
+    public ReadUserCakeResponse readMyCake() {
+        User user = authenticationFacade.getCurrentUser();
+
+        Cake cake = cakeRepository.findByUserOrderByBrithDayDesc(user);
+        return ReadUserCakeResponse.builder()
+                .id(cake.getId())
+                .birthDay(cake.getBrithDay())
+                .userName(user.getName())
+                .theme(cake.getTheme())
                 .build();
     }
 }
