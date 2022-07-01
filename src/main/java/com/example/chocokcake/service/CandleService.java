@@ -25,7 +25,7 @@ public class CandleService {
             throw new BaseException(ErrorCode.UN_AUTHORIZED_TOKEN_EXCEPTION);
         }
         Cake cake = cakeRepository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND));
         return CandleListResponse.builder()
                 .candles(candleRepository.findByCake(cake).stream()
                         .map(candle -> CandleResponse.builder()
