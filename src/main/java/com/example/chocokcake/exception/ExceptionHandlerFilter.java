@@ -1,7 +1,6 @@
 package com.example.chocokcake.exception;
 
 import com.example.chocokcake.controller.dto.ErrorResponse;
-import io.jsonwebtoken.MalformedJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
