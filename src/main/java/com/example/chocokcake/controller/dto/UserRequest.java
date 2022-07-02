@@ -14,8 +14,12 @@ import java.util.Date;
 @AllArgsConstructor
 public class UserRequest {
     private String accountId;
+
     private String password;
+
     private String name;
+
     private Integer monthOfBirthDay;
+
     private Integer dayOfBirthDay;
 }
