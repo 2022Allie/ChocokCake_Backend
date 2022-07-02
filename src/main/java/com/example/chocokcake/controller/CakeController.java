@@ -24,8 +24,8 @@ public class CakeController {
         return cakeService.readMyCake();
     }
 
-    @GetMapping("/cake/{cake-id}")
-    public ReadCakeDetailsResponse readCakeDetails(@PathVariable("cake-id") Long cakeId) {
+    @GetMapping("/cake/{cake_id}")
+    public ReadCakeDetailsResponse readCakeDetails(@PathVariable("cake_id") Long cakeId) {
         return cakeService.readCakeDetails(cakeId);
     }
 }
