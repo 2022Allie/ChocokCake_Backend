@@ -2,6 +2,7 @@ package com.example.chocokcake.controller;
 
 import com.example.chocokcake.controller.dto.CandleListResponse;
 import com.example.chocokcake.controller.dto.LetterRequest;
+import com.example.chocokcake.controller.dto.LetterResponse;
 import com.example.chocokcake.controller.dto.MessageResponse;
 import com.example.chocokcake.service.CandleService;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +22,10 @@ public class CandleController {
     @PostMapping("/cake/{cake_id}/candle")
     public MessageResponse postLetter(@PathVariable("cake_id") Long id, @RequestBody LetterRequest request) {
         return candleService.postLetter(id, request);
+    }
+
+    @GetMapping("/cake/{cake_id}/candle/{candle_id}")
+    public LetterResponse getCandle(@PathVariable("cake_id") Long cake_id, @PathVariable("candle_id") Long candle_id) {
+        return candleService.getCandle(cake_id, candle_id);
     }
 }

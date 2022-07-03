@@ -1,9 +1,6 @@
 package com.example.chocokcake.service;
 
-import com.example.chocokcake.controller.dto.CandleListResponse;
-import com.example.chocokcake.controller.dto.CandleResponse;
-import com.example.chocokcake.controller.dto.LetterRequest;
-import com.example.chocokcake.controller.dto.MessageResponse;
+import com.example.chocokcake.controller.dto.*;
 import com.example.chocokcake.entity.Cake;
 import com.example.chocokcake.entity.Candle;
 import com.example.chocokcake.entity.repository.CakeRepository;
@@ -52,6 +49,19 @@ public class CandleService {
                 .build());
         return MessageResponse.builder()
                 .message("편지를 보냈어요")
+                .build();
+    }
+
+    @Transactional
+    public LetterResponse getCandle(Long cake_id, Long candle_id) {
+        Cake cake = cakeRepository.findById(cake_id)
+                .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND_CAKE));
+        Candle candle = candleRepository.findById(candle_id)
+                .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND_CANDLE));
+        return LetterResponse.builder()
+                .letter(candle.getLetter())
+                .postman(candle.getPostman())
+                .theme(candle.getTheme())
                 .build();
     }
 }
