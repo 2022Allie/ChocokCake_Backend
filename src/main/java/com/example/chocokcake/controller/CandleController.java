@@ -11,14 +11,15 @@ import javax.websocket.server.PathParam;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/cake")
 public class CandleController {
     private final CandleService candleService;
-    @GetMapping("/cake/{cake_id}/candle")
+    @GetMapping("/{cake_id}/candle")
     public CandleListResponse getCandleList(@PathVariable("cake_id") Long id){
         return candleService.getCandleList(id);
     }
 
-    @PostMapping("/cake/{cake_id}/candle")
+    @PostMapping("/{cake_id}/candle")
     public MessageResponse postLetter(@PathVariable("cake_id") Long id, @RequestBody LetterRequest request) {
         return candleService.postLetter(id, request);
     }

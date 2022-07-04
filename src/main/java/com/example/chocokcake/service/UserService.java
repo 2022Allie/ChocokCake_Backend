@@ -56,7 +56,6 @@ public class UserService {
     }
     @Transactional
     public MessageResponse withdrawal(LoginRequest request){
-
         User user = userRepository.findByAccountId(request.getAccountId())
                 .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND_USER));
         if(!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
@@ -64,7 +63,7 @@ public class UserService {
         }
         userRepository.delete(user);
         return MessageResponse.builder()
-                .message("")
+                .message("회원님의 계정이 정상적으로 탈퇴되었습니다.")
                 .build();
     }
 }

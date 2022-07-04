@@ -11,18 +11,19 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/account")
 public class UserController {
     private final UserService userService;
-    @PostMapping("/account")
+    @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public MessageResponse createUser(@RequestBody UserRequest request){
         return userService.join(request);
     }
-    @PostMapping("/account/login")
+    @PostMapping("/login")
     public TokenResponse login(@RequestBody LoginRequest request){
         return userService.login(request);
     }
-    @DeleteMapping("/account")
+    @DeleteMapping
     public MessageResponse withdrawal(@RequestBody LoginRequest request){
         return userService.withdrawal(request);
     }
