@@ -25,11 +25,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .authorizeRequests()
-                .antMatchers().permitAll()
-                .antMatchers("/account").permitAll()
-                .antMatchers("/account/login").permitAll()
-                .antMatchers("/cake/**").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers().authenticated()
+                .antMatchers("/cake").authenticated()
+                .antMatchers("/cake/mine").authenticated()
+                .antMatchers("/cake/candle/**").authenticated()
+                .anyRequest().permitAll()
                 .and().apply(new JwtConfigurer(jwtTokenProvider, exceptionHandlerFilter));
     }
     @Bean
