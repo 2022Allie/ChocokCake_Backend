@@ -25,7 +25,7 @@ public class CandleController {
     }
 
     @GetMapping("/cake/{cake_id}/candle/{candle_id}")
-    public LetterResponse getCandle(@PathVariable("cake_id") Long cake_id, @PathVariable("candle_id") Long candle_id) {
-        return candleService.getCandle(cake_id, candle_id);
+    public LetterResponse getCandle(@PathVariable("cake_id") Long cakeId, @PathVariable("candle_id") Long candleId) {
+        return candleService.getCandle(cakeId, candleId);
     }
 }
