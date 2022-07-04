@@ -10,6 +10,7 @@ public enum ErrorCode {
     FORBIDDEN(403, "FORBIDDEN : 권한 오류"),
     NOT_FOUND_CAKE(404, "NOT_FOUND_CAKE : 케이크를 찾을 수 없습니다."),
     NOT_FOUND_USER(404, "NOT_FOUND_USER : 사용자를 찾을 수 없습니다."),
+    NOT_FOUND_CANDLE(404, "NOT_FOUND_CANDLE : 초를 찾을 수 없습니다."),
     INTERNAL_SERVER_ERROR(500, "INTERNAL_SERVERERROR");
 
     private final Integer status;
