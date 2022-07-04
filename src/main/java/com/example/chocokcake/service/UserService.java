@@ -43,7 +43,7 @@ public class UserService {
                     throw new BaseException(ErrorCode.DUPLICATE_MEMBER);
                 });
     }
-
+    @Transactional
     public TokenResponse login(LoginRequest request) {
         User user = userRepository.findByAccountId(request.getAccountId())
                 .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND_USER));
@@ -52,6 +52,19 @@ public class UserService {
         }
         return TokenResponse.builder()
                 .accessToken(jwtTokenProvider.generateAccessToken(request.getAccountId()))
+                .build();
+    }
+    @Transactional
+    public MessageResponse withdrawal(LoginRequest request){
+
+        User user = userRepository.findByAccountId(request.getAccountId())
+                .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND_USER));
+        if(!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new BaseException(ErrorCode.PASSWORD_NOT_MATCHED);
+        }
+        userRepository.delete(user);
+        return MessageResponse.builder()
+                .message("")
                 .build();
     }
 }

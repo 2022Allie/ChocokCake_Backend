@@ -7,10 +7,7 @@ import com.example.chocokcake.controller.dto.UserRequest;
 import com.example.chocokcake.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,5 +21,9 @@ public class UserController {
     @PostMapping("/account/login")
     public TokenResponse login(@RequestBody LoginRequest request){
         return userService.login(request);
+    }
+    @DeleteMapping("/account")
+    public MessageResponse withdrawal(@RequestBody LoginRequest request){
+        return userService.withdrawal(request);
     }
 }
