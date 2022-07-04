@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum ErrorCode {
-    DUPLICATE_MEMBER(400, "DUPLICATE MEMBER"),
+    DUPLICATE_MEMBER(400, "DUPLICATE MEMBER : 중복된 회원입니다."),
     UN_AUTHORIZED_TOKEN_EXCEPTION(401, "UN_AUTHORIZED_TOKEN_EXCEPTION : 인증되지 않은 토큰입니다."),
     PASSWORD_NOT_MATCHED(401, "PASSWORD_NOT_MATCHED : 비밀번호가 틀렸습니다."),
     FORBIDDEN(403, "FORBIDDEN : 권한 오류"),
