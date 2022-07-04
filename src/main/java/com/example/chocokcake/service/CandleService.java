@@ -53,10 +53,10 @@ public class CandleService {
     }
 
     @Transactional
-    public LetterResponse getCandle(Long cake_id, Long candle_id) {
-        Cake cake = cakeRepository.findById(cake_id)
+    public LetterResponse getCandle(Long cakeId, Long candleId) {
+        Cake cake = cakeRepository.findById(cakeId)
                 .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND_CAKE));
-        Candle candle = candleRepository.findById(candle_id)
+        Candle candle = candleRepository.findById(candleId)
                 .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND_CANDLE));
         return LetterResponse.builder()
                 .letter(candle.getLetter())
