@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -61,7 +62,7 @@ public class UserService {
         if(!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new BaseException(ErrorCode.PASSWORD_NOT_MATCHED);
         }
-        userRepository.delete(user);
+        userRepository.deleteById(user.getId());
         return MessageResponse.builder()
                 .message("회원님의 계정이 정상적으로 탈퇴되었습니다.")
                 .build();
