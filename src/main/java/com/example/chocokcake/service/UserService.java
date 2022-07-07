@@ -1,9 +1,6 @@
 package com.example.chocokcake.service;
 
-import com.example.chocokcake.controller.dto.LoginRequest;
-import com.example.chocokcake.controller.dto.MessageResponse;
-import com.example.chocokcake.controller.dto.TokenResponse;
-import com.example.chocokcake.controller.dto.UserRequest;
+import com.example.chocokcake.controller.dto.*;
 import com.example.chocokcake.entity.User;
 import com.example.chocokcake.entity.repository.UserRepository;
 import com.example.chocokcake.exception.BaseException;
@@ -24,6 +21,19 @@ public class UserService {
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private final UserRepository userRepository;
     private final AuthenticationFacade authenticationFacade;
+
+    public MessageResponse checkIdDuplication(AccountIdRequest request) {
+        boolean isExists = userRepository.existsByAccountId(request.getAccountId());
+
+        if(isExists) {
+            throw new BaseException(ErrorCode.DUPLICATE_MEMBER);
+        }
+
+        return MessageResponse.builder()
+                .message("사용가능한 아이디입니다")
+                .build();
+    }
+
     @Transactional
     public MessageResponse join(UserRequest request) {
         duplicateMemberVerification(request.getAccountId());
