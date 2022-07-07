@@ -46,6 +46,7 @@ public class CandleService {
                 .letter(request.getLetter())
                 .postman(request.getPostman())
                 .theme(request.getTheme())
+                .cake(cake)
                 .build());
         return MessageResponse.builder()
                 .message("편지를 보냈어요")
