@@ -25,7 +25,7 @@ public class CandleController {
         return candleService.postLetter(id, request);
     }
 
-    @GetMapping("/cake/candle/{candle_id}")
+    @GetMapping("/candle/{candle_id}")
     public LetterResponse getCandle(@PathVariable("candle_id") Long candleId) {
         return candleService.getCandle(candleId);
     }

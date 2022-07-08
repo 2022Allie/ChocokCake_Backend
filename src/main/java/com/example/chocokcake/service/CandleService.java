@@ -3,6 +3,7 @@ package com.example.chocokcake.service;
 import com.example.chocokcake.controller.dto.*;
 import com.example.chocokcake.entity.Cake;
 import com.example.chocokcake.entity.Candle;
+import com.example.chocokcake.entity.User;
 import com.example.chocokcake.entity.repository.CakeRepository;
 import com.example.chocokcake.entity.repository.CandleRepository;
 import com.example.chocokcake.entity.repository.UserRepository;
