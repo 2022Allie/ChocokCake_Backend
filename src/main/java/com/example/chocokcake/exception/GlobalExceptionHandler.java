@@ -1,5 +1,6 @@
 package com.example.chocokcake.exception;
 
+import com.example.chocokcake.exception.costomException.BaseException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

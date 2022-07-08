@@ -4,13 +4,14 @@ import com.example.chocokcake.controller.dto.*;
 import com.example.chocokcake.entity.Cake;
 import com.example.chocokcake.entity.User;
 import com.example.chocokcake.entity.repository.CakeRepository;
-import com.example.chocokcake.exception.BaseException;
+import com.example.chocokcake.exception.costomException.BaseException;
 import com.example.chocokcake.exception.ErrorCode;
 import com.example.chocokcake.security.auth.AuthenticationFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,7 +21,17 @@ public class CakeService {
     private final AuthenticationFacade authenticationFacade;
     @Transactional
     public MessageResponse createCake(ThemeRequest theme){
+        if(authenticationFacade.getCurrentUser()==null){
+            throw new BaseException(ErrorCode.NOT_FOUND_USER);
+        }
         User user = authenticationFacade.getCurrentUser();
+        List<Cake> cakeList = cakeRepository.findCakesByUser(user);
+        if(cakeList.size()-1 >= 0){
+            Cake lastCake = cakeList.get(cakeList.size()-1);
+            if(user.getBirthDay().isEqual(lastCake.getBrithDay())){
+                throw new BaseException(ErrorCode.ALREADY_EXIST_CAKE);
+            }
+        }
         cakeRepository.save(Cake.builder()
                 .theme(theme.getTheme())
                 .brithDay(user.getBirthDay())
