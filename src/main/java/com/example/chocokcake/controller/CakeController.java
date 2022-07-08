@@ -1,9 +1,6 @@
 package com.example.chocokcake.controller;
 
-import com.example.chocokcake.controller.dto.MessageResponse;
-import com.example.chocokcake.controller.dto.ReadCakeDetailsResponse;
-import com.example.chocokcake.controller.dto.ReadUserCakeResponse;
-import com.example.chocokcake.controller.dto.ThemeRequest;
+import com.example.chocokcake.controller.dto.*;
 import com.example.chocokcake.service.CakeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,7 +18,7 @@ public class CakeController {
     }
 
     @GetMapping("/mine")
-    public ReadUserCakeResponse readMyCake() {
+    public ReadUserCakeListResponse readMyCake() {
         return cakeService.readMyCake();
     }
 

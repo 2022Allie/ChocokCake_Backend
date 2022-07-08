@@ -1,9 +1,6 @@
 package com.example.chocokcake.service;
 
-import com.example.chocokcake.controller.dto.MessageResponse;
-import com.example.chocokcake.controller.dto.ReadCakeDetailsResponse;
-import com.example.chocokcake.controller.dto.ReadUserCakeResponse;
-import com.example.chocokcake.controller.dto.ThemeRequest;
+import com.example.chocokcake.controller.dto.*;
 import com.example.chocokcake.entity.Cake;
 import com.example.chocokcake.entity.User;
 import com.example.chocokcake.entity.repository.CakeRepository;
@@ -14,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,15 +34,20 @@ public class CakeService {
     }
 
     @Transactional
-    public ReadUserCakeResponse readMyCake() {
+    public ReadUserCakeListResponse readMyCake() {
+        if(authenticationFacade.getCurrentUser() == null){
+            throw new BaseException(ErrorCode.FORBIDDEN);
+        }
         User user = authenticationFacade.getCurrentUser();
-
-        Cake cake = cakeRepository.findByUserOrderByBrithDayDesc(user);
-        return ReadUserCakeResponse.builder()
-                .id(cake.getId())
-                .birthDay(cake.getBrithDay())
-                .userName(user.getName())
-                .theme(cake.getTheme())
+        return ReadUserCakeListResponse.builder()
+                .cakeList(cakeRepository.findCakesByUser(user).stream()
+                        .map(cake -> ReadUserCakeResponse.builder()
+                                .id(cake.getId())
+                                .theme(cake.getTheme())
+                                .userName(cake.getUser().getName())
+                                .birthDay(cake.getBrithDay())
+                                .build())
+                        .collect(Collectors.toList()))
                 .build();
     }
 
