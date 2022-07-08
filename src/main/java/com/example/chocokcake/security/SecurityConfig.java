@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsUtils;
 
 @Configuration
 @EnableWebSecurity
@@ -18,13 +19,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final ExceptionHandlerFilter exceptionHandlerFilter;
     @Override
     protected void configure(HttpSecurity http) throws Exception{
+
         http
+                .cors().and()
                 .csrf().disable()
                 .sessionManagement().disable()
                 .formLogin().disable()
                 .cors()
                 .and()
                 .authorizeRequests()
+                .requestMatchers(CorsUtils::isCorsRequest).permitAll()
                 .antMatchers().authenticated()
                 .antMatchers("/cake").authenticated()
                 .antMatchers("/cake/mine").authenticated()

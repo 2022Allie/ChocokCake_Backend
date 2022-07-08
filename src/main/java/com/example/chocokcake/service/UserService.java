@@ -1,7 +1,10 @@
 package com.example.chocokcake.service;
 
 import com.example.chocokcake.controller.dto.*;
+import com.example.chocokcake.entity.Cake;
 import com.example.chocokcake.entity.User;
+import com.example.chocokcake.entity.repository.CakeRepository;
+import com.example.chocokcake.entity.repository.CandleRepository;
 import com.example.chocokcake.entity.repository.UserRepository;
 import com.example.chocokcake.exception.BaseException;
 import com.example.chocokcake.exception.ErrorCode;
@@ -12,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -21,14 +25,14 @@ public class UserService {
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private final UserRepository userRepository;
     private final AuthenticationFacade authenticationFacade;
+    private final CandleRepository candleRepository;
+    private final CakeRepository cakeRepository;
 
     public MessageResponse checkIdDuplication(AccountIdRequest request) {
         boolean isExists = userRepository.existsByAccountId(request.getAccountId());
-
         if(isExists) {
             throw new BaseException(ErrorCode.DUPLICATE_MEMBER);
         }
-
         return MessageResponse.builder()
                 .message("사용가능한 아이디입니다")
                 .build();
@@ -72,7 +76,10 @@ public class UserService {
         if(!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new BaseException(ErrorCode.PASSWORD_NOT_MATCHED);
         }
-        userRepository.deleteById(user.getId());
+//        Cake cake = user.getCakeList().get(1);
+//        candleRepository.deleteCandlesByCake(cake);
+//        cakeRepository.deleteCakesByUser(user);
+//        userRepository.deleteById(user.getId());
         return MessageResponse.builder()
                 .message("회원님의 계정이 정상적으로 탈퇴되었습니다.")
                 .build();
