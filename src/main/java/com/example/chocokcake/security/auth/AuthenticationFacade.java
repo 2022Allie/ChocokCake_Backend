@@ -2,7 +2,7 @@ package com.example.chocokcake.security.auth;
 
 import com.example.chocokcake.entity.User;
 import com.example.chocokcake.entity.repository.UserRepository;
-import com.example.chocokcake.exception.BaseException;
+import com.example.chocokcake.exception.costomException.BaseException;
 import com.example.chocokcake.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;

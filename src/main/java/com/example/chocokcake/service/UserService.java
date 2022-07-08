@@ -1,12 +1,11 @@
 package com.example.chocokcake.service;
 
 import com.example.chocokcake.controller.dto.*;
-import com.example.chocokcake.entity.Cake;
 import com.example.chocokcake.entity.User;
 import com.example.chocokcake.entity.repository.CakeRepository;
 import com.example.chocokcake.entity.repository.CandleRepository;
 import com.example.chocokcake.entity.repository.UserRepository;
-import com.example.chocokcake.exception.BaseException;
+import com.example.chocokcake.exception.costomException.BaseException;
 import com.example.chocokcake.exception.ErrorCode;
 import com.example.chocokcake.security.JwtTokenProvider;
 import com.example.chocokcake.security.auth.AuthenticationFacade;
@@ -15,8 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor

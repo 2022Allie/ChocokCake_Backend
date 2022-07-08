@@ -1,5 +1,6 @@
-package com.example.chocokcake.exception;
+package com.example.chocokcake.exception.costomException;
 
+import com.example.chocokcake.exception.ErrorCode;
 import lombok.Getter;
 
 @Getter
