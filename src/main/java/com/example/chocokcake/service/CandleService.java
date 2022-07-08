@@ -3,6 +3,7 @@ package com.example.chocokcake.service;
 import com.example.chocokcake.controller.dto.*;
 import com.example.chocokcake.entity.Cake;
 import com.example.chocokcake.entity.Candle;
+import com.example.chocokcake.entity.User;
 import com.example.chocokcake.entity.repository.CakeRepository;
 import com.example.chocokcake.entity.repository.CandleRepository;
 import com.example.chocokcake.exception.costomException.BaseException;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.stream.Collectors;
 
 @Service
@@ -59,6 +61,14 @@ public class CandleService {
     public LetterResponse getCandle(Long candleId) {
         Candle candle = candleRepository.findById(candleId)
                 .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND_CANDLE));
+        Cake cake = cakeRepository.findById(candle.getCake().getId())
+                .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND_CAKE));
+        if(!authenticationFacade.getCurrentUser().equals(cake.getUser())){
+            throw new BaseException(ErrorCode.UN_AUTHORIZED_TOKEN_EXCEPTION);
+        }
+        if(cake.getBrithDay().isAfter(LocalDate.now())){
+            throw new BaseException(ErrorCode.NOT_YET_BIRTHDAY);
+        }
         return LetterResponse.builder()
                 .letter(candle.getLetter())
                 .postman(candle.getPostman())
