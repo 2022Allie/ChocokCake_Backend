@@ -27,6 +27,9 @@ public class CandleService {
         }
         Cake cake = cakeRepository.findById(id)
                 .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND_CAKE));
+        if(authenticationFacade.getCurrentUser() != cake.getUser()){
+            throw new BaseException(ErrorCode.FORBIDDEN);
+        }
         return CandleListResponse.builder()
                 .candles(candleRepository.findByCake(cake).stream()
                         .map(candle -> CandleResponse.builder()
