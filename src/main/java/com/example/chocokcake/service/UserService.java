@@ -1,6 +1,7 @@
 package com.example.chocokcake.service;
 
 import com.example.chocokcake.controller.dto.*;
+import com.example.chocokcake.entity.Cake;
 import com.example.chocokcake.entity.User;
 import com.example.chocokcake.entity.repository.CakeRepository;
 import com.example.chocokcake.entity.repository.CandleRepository;
@@ -73,10 +74,7 @@ public class UserService {
         if(!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new BaseException(ErrorCode.PASSWORD_NOT_MATCHED);
         }
-//        Cake cake = user.getCakeList().get(1);
-//        candleRepository.deleteCandlesByCake(cake);
-//        cakeRepository.deleteCakesByUser(user);
-//        userRepository.deleteById(user.getId());
+        userRepository.deleteById(user.getId());
         return MessageResponse.builder()
                 .message("회원님의 계정이 정상적으로 탈퇴되었습니다.")
                 .build();

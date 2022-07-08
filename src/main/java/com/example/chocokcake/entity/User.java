@@ -30,6 +30,6 @@ public class User {
     @Column(name = "birth_day")
     private LocalDate birthDay;
     
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
     private List<Cake> cakeList;
 }

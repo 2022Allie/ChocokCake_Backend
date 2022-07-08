@@ -24,7 +24,7 @@ public class Cake {
     @Column(name = "birth_day")
     private LocalDate brithDay;
 
-    @OneToMany(mappedBy = "cake")
+    @OneToMany(mappedBy = "cake", cascade = CascadeType.REMOVE)
     private List<Candle> candleList;
     
     @ManyToOne
