@@ -11,11 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-<<<<<<< Updated upstream
-import java.util.ArrayList;
-import java.util.List;
-=======
->>>>>>> Stashed changes
 import java.util.stream.Collectors;
 
 @Service
