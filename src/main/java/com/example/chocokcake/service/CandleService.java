@@ -66,7 +66,7 @@ public class CandleService {
         if(!authenticationFacade.getCurrentUser().equals(cake.getUser())){
             throw new BaseException(ErrorCode.UN_AUTHORIZED_TOKEN_EXCEPTION);
         }
-        if(cake.getBrithDay().isAfter(LocalDate.now())){
+        if(cake.getBirthDay().isAfter(LocalDate.now())){
             throw new BaseException(ErrorCode.NOT_YET_BIRTHDAY);
         }
         return LetterResponse.builder()

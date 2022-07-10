@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,15 +27,18 @@ public class CakeService {
         }
         User user = authenticationFacade.getCurrentUser();
         List<Cake> cakeList = cakeRepository.findCakesByUser(user);
+        if(user.getBirthDay().isBefore(LocalDate.now())){
+            user.setBirthDay(user.getBirthDay().plusYears(1));
+        }
         if(cakeList.size()-1 >= 0){
             Cake lastCake = cakeList.get(cakeList.size()-1);
-            if(user.getBirthDay().isEqual(lastCake.getBrithDay())){
+            if(user.getBirthDay().isEqual(lastCake.getBirthDay())){
                 throw new BaseException(ErrorCode.ALREADY_EXIST_CAKE);
             }
         }
         cakeRepository.save(Cake.builder()
                 .theme(theme.getTheme())
-                .brithDay(user.getBirthDay())
+                .birthDay(user.getBirthDay())
                 .user(user)
                 .build());
         return MessageResponse.builder()
@@ -54,7 +58,7 @@ public class CakeService {
                                 .id(cake.getId())
                                 .theme(cake.getTheme())
                                 .userName(cake.getUser().getName())
-                                .birthDay(cake.getBrithDay())
+                                .birthDay(cake.getBirthDay())
                                 .build())
                         .collect(Collectors.toList()))
                 .build();
@@ -66,7 +70,7 @@ public class CakeService {
          .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND_CAKE));
         return ReadCakeDetailsResponse.builder()
                 .id(cake.getId())
-                .birthDay(cake.getBrithDay())
+                .birthDay(cake.getBirthDay())
                 .userName(cake.getUser().getName())
                 .theme(cake.getTheme())
                 .build();
