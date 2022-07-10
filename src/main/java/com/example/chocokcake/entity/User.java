@@ -32,4 +32,8 @@ public class User {
     
     @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
     private List<Cake> cakeList;
+
+    public void setBirthDay(LocalDate localDate){
+        birthDay = localDate;
+    }
 }

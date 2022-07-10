@@ -22,7 +22,7 @@ public class Cake {
     private Long theme;
 
     @Column(name = "birth_day")
-    private LocalDate brithDay;
+    private LocalDate birthDay;
 
     @OneToMany(mappedBy = "cake", cascade = CascadeType.REMOVE)
     private List<Candle> candleList;
