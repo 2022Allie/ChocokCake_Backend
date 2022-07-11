@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,7 +29,7 @@ public class CakeService {
         User user = authenticationFacade.getCurrentUser();
         List<Cake> cakeList = cakeRepository.findCakesByUser(user);
         if(user.getBirthDay().isBefore(LocalDate.now())){
-            user.setBirthDay(user.getBirthDay().plusYears(1));
+            user.setBirthDay(getBirthDayNow(user.getBirthDay().getMonth(), user.getBirthDay().getDayOfMonth()));
         }
         if(cakeList.size()-1 >= 0){
             Cake lastCake = cakeList.get(cakeList.size()-1);
@@ -45,7 +46,13 @@ public class CakeService {
                 .message("케이크가 생성되었습니다." )
                 .build();
     }
-
+    private LocalDate getBirthDayNow(Month month, Integer day){
+        LocalDate birthDay = LocalDate.of(LocalDate.now().getYear(), month, day);
+        if (birthDay.isBefore(LocalDate.now())) {
+            birthDay = birthDay.plusYears(1);
+        }
+        return birthDay;
+    }
     @Transactional
     public ReadUserCakeListResponse readMyCake() {
         if(authenticationFacade.getCurrentUser() == null){
