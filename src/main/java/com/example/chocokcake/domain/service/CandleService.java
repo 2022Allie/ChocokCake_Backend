@@ -45,6 +45,9 @@ public class CandleService {
     public MessageResponse postLetter(Long id, LetterRequest request) {
         Cake cake = cakeRepository.findById(id)
                 .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND_CAKE));
+        if(cake.getBirthDay().isBefore(LocalDate.now())){
+            throw new BaseException(ErrorCode.AlREADY_BIRTHDAY_LATER);
+        }
         candleRepository.save(Candle.builder()
                 .letter(request.getLetter())
                 .postman(request.getPostman())
