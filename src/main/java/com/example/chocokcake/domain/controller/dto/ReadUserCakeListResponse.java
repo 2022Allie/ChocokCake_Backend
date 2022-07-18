@@ -1,0 +1,15 @@
+package com.example.chocokcake.domain.controller.dto;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Builder
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+public class ReadUserCakeListResponse {
+    private List<ReadUserCakeResponse> cakeList;
+}
