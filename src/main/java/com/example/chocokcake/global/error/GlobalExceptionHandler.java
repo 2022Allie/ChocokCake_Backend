@@ -1,6 +1,7 @@
-package com.example.chocokcake.global.exception;
+package com.example.chocokcake.global.error;
 
-import com.example.chocokcake.global.exception.costomException.BaseException;
+import com.example.chocokcake.global.error.exception.BaseException;
+import com.example.chocokcake.global.error.exception.UnAuthorizedTokenFilterException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -14,9 +15,9 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(e.getErrorCode().getStatus())
                 .body(e.getErrorCode().getMessage());
     }
-    @ExceptionHandler(value = ClassCastException.class)
-    public ResponseEntity authorizationException(){
-        ErrorCode errorCode = ErrorCode.UN_AUTHORIZED_TOKEN_EXCEPTION;
+    @ExceptionHandler(value = UnAuthorizedTokenFilterException.class)
+    public ResponseEntity authorizedTokenException(){
+        ErrorCode errorCode = ErrorCode.UN_AUTHORIZED_TOKEN_FILTER_EXCEPTION;
         return ResponseEntity.status(errorCode.getStatus())
                 .body(errorCode.getMessage());
     }

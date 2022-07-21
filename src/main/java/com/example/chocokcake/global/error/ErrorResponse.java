@@ -1,4 +1,4 @@
-package com.example.chocokcake.domain.controller.dto;
+package com.example.chocokcake.global.error;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

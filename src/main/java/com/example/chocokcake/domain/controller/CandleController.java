@@ -1,9 +1,9 @@
 package com.example.chocokcake.domain.controller;
 
-import com.example.chocokcake.domain.controller.dto.CandleListResponse;
-import com.example.chocokcake.domain.controller.dto.LetterRequest;
-import com.example.chocokcake.domain.controller.dto.LetterResponse;
-import com.example.chocokcake.domain.controller.dto.MessageResponse;
+import com.example.chocokcake.domain.controller.dto.response.CandleListResponse;
+import com.example.chocokcake.domain.controller.dto.request.LetterRequest;
+import com.example.chocokcake.domain.controller.dto.response.LetterResponse;
+import com.example.chocokcake.domain.controller.dto.response.MessageResponse;
 import com.example.chocokcake.domain.service.CandleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

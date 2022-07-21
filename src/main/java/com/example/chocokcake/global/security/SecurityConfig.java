@@ -1,6 +1,6 @@
 package com.example.chocokcake.global.security;
 
-import com.example.chocokcake.global.exception.ExceptionHandlerFilter;
+import com.example.chocokcake.global.error.ExceptionHandlerFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

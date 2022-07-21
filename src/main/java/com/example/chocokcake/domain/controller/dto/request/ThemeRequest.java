@@ -1,4 +1,4 @@
-package com.example.chocokcake.domain.controller.dto;
+package com.example.chocokcake.domain.controller.dto.request;
 
 import lombok.*;
 

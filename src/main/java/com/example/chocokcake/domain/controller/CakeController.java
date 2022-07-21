@@ -1,9 +1,9 @@
 package com.example.chocokcake.domain.controller;
 
-import com.example.chocokcake.domain.controller.dto.MessageResponse;
-import com.example.chocokcake.domain.controller.dto.ReadCakeDetailsResponse;
-import com.example.chocokcake.domain.controller.dto.ReadUserCakeListResponse;
-import com.example.chocokcake.domain.controller.dto.ThemeRequest;
+import com.example.chocokcake.domain.controller.dto.response.MessageResponse;
+import com.example.chocokcake.domain.controller.dto.response.ReadCakeDetailsResponse;
+import com.example.chocokcake.domain.controller.dto.response.ReadUserCakeListResponse;
+import com.example.chocokcake.domain.controller.dto.request.ThemeRequest;
 import com.example.chocokcake.domain.service.CakeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
