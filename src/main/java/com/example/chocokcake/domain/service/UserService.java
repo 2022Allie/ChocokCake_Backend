@@ -78,4 +78,13 @@ public class UserService {
                 .message("회원님의 계정이 정상적으로 탈퇴되었습니다.")
                 .build();
     }
+
+    public UserInfoResponse getUserInfo() {
+        User user = authenticationFacade.getCurrentUser();
+        return UserInfoResponse.builder()
+                .name(user.getName())
+                .accountId(user.getAccountId())
+                .birthDay(user.getBirthDay())
+                .build();
+    }
 }

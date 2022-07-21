@@ -1,6 +1,5 @@
 package com.example.chocokcake.domain.controller;
 
-import com.example.chocokcake.controller.dto.*;
 import com.example.chocokcake.domain.controller.dto.*;
 import com.example.chocokcake.domain.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +16,10 @@ public class UserController {
     public MessageResponse id(@RequestBody AccountIdRequest request) {
         return userService.checkIdDuplication(request);
     }
-
+    @GetMapping("/information")
+    public UserInfoResponse getUserInfo(){
+        return userService.getUserInfo();
+    }
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public MessageResponse createUser(@RequestBody UserRequest request){

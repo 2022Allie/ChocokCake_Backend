@@ -1,6 +1,5 @@
 package com.example.chocokcake.domain.controller;
 
-import com.example.chocokcake.controller.dto.*;
 import com.example.chocokcake.domain.controller.dto.MessageResponse;
 import com.example.chocokcake.domain.controller.dto.ReadCakeDetailsResponse;
 import com.example.chocokcake.domain.controller.dto.ReadUserCakeListResponse;
