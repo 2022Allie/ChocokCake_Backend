@@ -1,7 +1,6 @@
-package com.example.chocokcake.global.exception;
+package com.example.chocokcake.global.error;
 
-import com.example.chocokcake.domain.controller.dto.ErrorResponse;
-import com.example.chocokcake.global.exception.costomException.UnAuthorizedTokenException;
+import com.example.chocokcake.global.error.exception.UnAuthorizedTokenException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -35,7 +34,7 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         }catch (UnAuthorizedTokenException e){
             log.error("exception exception handler filter");
-            setErrorResponse(ErrorCode.UN_AUTHORIZED_TOKEN_EXCEPTION, response, e);
+            setErrorResponse(ErrorCode.UN_AUTHORIZED_TOKEN_FILTER_EXCEPTION, response, e);
         } catch (RuntimeException e){
             log.error("runtime exception exception handler filter");
             setErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR, response, e);

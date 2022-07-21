@@ -1,4 +1,4 @@
-package com.example.chocokcake.domain.controller.dto;
+package com.example.chocokcake.domain.controller.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -6,6 +6,5 @@ import lombok.Getter;
 @Builder
 @Getter
 public class TokenResponse {
-
     private final String accessToken;
 }

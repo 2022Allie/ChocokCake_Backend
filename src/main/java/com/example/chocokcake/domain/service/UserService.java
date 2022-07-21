@@ -1,12 +1,18 @@
 package com.example.chocokcake.domain.service;
 
-import com.example.chocokcake.domain.controller.dto.*;
+import com.example.chocokcake.domain.controller.dto.request.AccountIdRequest;
+import com.example.chocokcake.domain.controller.dto.request.LoginRequest;
+import com.example.chocokcake.domain.controller.dto.request.UserRequest;
+import com.example.chocokcake.domain.controller.dto.response.MessageResponse;
+import com.example.chocokcake.domain.controller.dto.response.TokenResponse;
+import com.example.chocokcake.domain.controller.dto.response.UserInfoResponse;
 import com.example.chocokcake.domain.entity.user.User;
-import com.example.chocokcake.domain.entity.cake.CakeRepository;
-import com.example.chocokcake.domain.entity.candle.CandleRepository;
 import com.example.chocokcake.domain.entity.user.UserRepository;
-import com.example.chocokcake.global.exception.costomException.BaseException;
-import com.example.chocokcake.global.exception.ErrorCode;
+import com.example.chocokcake.global.error.exception.BaseException;
+import com.example.chocokcake.global.error.ErrorCode;
+import com.example.chocokcake.global.error.exception.DuplicateMemberException;
+import com.example.chocokcake.global.error.exception.NotFoundUserException;
+import com.example.chocokcake.global.error.exception.PasswordNotMatchedException;
 import com.example.chocokcake.global.security.JwtTokenProvider;
 import com.example.chocokcake.global.security.auth.AuthenticationFacade;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +28,6 @@ public class UserService {
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private final UserRepository userRepository;
     private final AuthenticationFacade authenticationFacade;
-    private final CandleRepository candleRepository;
-    private final CakeRepository cakeRepository;
 
     public MessageResponse checkIdDuplication(AccountIdRequest request) {
         boolean isExists = userRepository.existsByAccountId(request.getAccountId());
@@ -52,15 +56,15 @@ public class UserService {
     private void duplicateMemberVerification(String accountId){ //중복 회원 검증 로직
         userRepository.findByAccountId(accountId)
                 .ifPresent(m -> {
-                    throw new BaseException(ErrorCode.DUPLICATE_MEMBER);
+                    throw DuplicateMemberException.getInstance();
                 });
     }
     @Transactional
     public TokenResponse login(LoginRequest request) {
         User user = userRepository.findByAccountId(request.getAccountId())
-                .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND_USER));
+                .orElseThrow(NotFoundUserException::getInstance);
         if(!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new BaseException(ErrorCode.PASSWORD_NOT_MATCHED);
+            throw PasswordNotMatchedException.getInstance();
         }
         return TokenResponse.builder()
                 .accessToken(jwtTokenProvider.generateAccessToken(request.getAccountId()))
@@ -69,9 +73,9 @@ public class UserService {
     @Transactional
     public MessageResponse withdrawal(LoginRequest request){
         User user = userRepository.findByAccountId(request.getAccountId())
-                .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND_USER));
+                .orElseThrow(NotFoundUserException::getInstance);
         if(!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new BaseException(ErrorCode.PASSWORD_NOT_MATCHED);
+            throw PasswordNotMatchedException.getInstance();
         }
         userRepository.deleteById(user.getId());
         return MessageResponse.builder()

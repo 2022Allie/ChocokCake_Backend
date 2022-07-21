@@ -1,4 +1,4 @@
-package com.example.chocokcake.domain.controller.dto;
+package com.example.chocokcake.domain.controller.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountIdRequest {
+public class LetterRequest {
+    private Long theme;
 
-    private String accountId;
+    private String postman;
+
+    private String letter;
 }

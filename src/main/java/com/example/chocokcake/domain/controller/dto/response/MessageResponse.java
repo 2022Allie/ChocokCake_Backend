@@ -1,4 +1,4 @@
-package com.example.chocokcake.domain.controller.dto;
+package com.example.chocokcake.domain.controller.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;

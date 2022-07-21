@@ -1,4 +1,4 @@
-package com.example.chocokcake.global.exception;
+package com.example.chocokcake.global.error;
 
 import lombok.Getter;
 
@@ -9,6 +9,7 @@ public enum ErrorCode {
     NOT_YET_BIRTHDAY(400,"NOT_YET_BIRTHDAY : 아직 생일이 지나지 않았습니다."),
     AlREADY_BIRTHDAY_LATER(400, "AlREADY_BIRTHDAY_LATER : 이미 생일이 지났습니다."),
     UN_AUTHORIZED_TOKEN_EXCEPTION(401, "UN_AUTHORIZED_TOKEN_EXCEPTION : 인증되지 않은 토큰입니다."),
+    UN_AUTHORIZED_TOKEN_FILTER_EXCEPTION(401, "UN_AUTHORIZED_TOKEN_EXCEPTION : 인증되지 않은 토큰입니다."),
     PASSWORD_NOT_MATCHED(401, "PASSWORD_NOT_MATCHED : 비밀번호가 틀렸습니다."),
     FORBIDDEN(403, "FORBIDDEN : 권한 오류"),
     ALREADY_EXIST_TOKEN(403,"ALREADY EXIST TOKEN : 이미 토큰이 존재합니다."),

@@ -2,8 +2,7 @@ package com.example.chocokcake.global.security.auth;
 
 import com.example.chocokcake.domain.entity.user.User;
 import com.example.chocokcake.domain.entity.user.UserRepository;
-import com.example.chocokcake.global.exception.costomException.BaseException;
-import com.example.chocokcake.global.exception.ErrorCode;
+import com.example.chocokcake.global.error.exception.NotFoundUserException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,7 +18,7 @@ public class AuthenticationFacade {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         AuthDetails authDetails = (AuthDetails) authentication.getPrincipal();
         return userRepository.findByAccountId(authDetails.getUsername())
-                .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND_USER));
+                .orElseThrow(NotFoundUserException::getInstance);
     }
     public LocalDate getBirthDay(Integer month, Integer day){
         LocalDate birthDay = LocalDate.of(LocalDate.now().getYear(), month, day);

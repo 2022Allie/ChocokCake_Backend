@@ -1,11 +1,16 @@
 package com.example.chocokcake.domain.service;
 
-import com.example.chocokcake.domain.controller.dto.*;
+import com.example.chocokcake.domain.controller.dto.request.ThemeRequest;
+import com.example.chocokcake.domain.controller.dto.response.MessageResponse;
+import com.example.chocokcake.domain.controller.dto.response.ReadCakeDetailsResponse;
+import com.example.chocokcake.domain.controller.dto.response.ReadUserCakeListResponse;
+import com.example.chocokcake.domain.controller.dto.response.ReadUserCakeResponse;
 import com.example.chocokcake.domain.entity.cake.Cake;
 import com.example.chocokcake.domain.entity.user.User;
 import com.example.chocokcake.domain.entity.cake.CakeRepository;
-import com.example.chocokcake.global.exception.costomException.BaseException;
-import com.example.chocokcake.global.exception.ErrorCode;
+import com.example.chocokcake.global.error.exception.*;
+import com.example.chocokcake.global.error.exception.AlreadyExistCakeException;
+import com.example.chocokcake.global.error.exception.ForbiddenException;
 import com.example.chocokcake.global.security.auth.AuthenticationFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,7 +29,7 @@ public class CakeService {
     @Transactional
     public MessageResponse createCake(ThemeRequest theme){
         if(authenticationFacade.getCurrentUser()==null){
-            throw new BaseException(ErrorCode.NOT_FOUND_USER);
+            throw NotFoundUserException.getInstance();
         }
         User user = authenticationFacade.getCurrentUser();
         List<Cake> cakeList = cakeRepository.findCakesByUser(user);
@@ -34,7 +39,7 @@ public class CakeService {
         if(cakeList.size()-1 >= 0){
             Cake lastCake = cakeList.get(cakeList.size()-1);
             if(user.getBirthDay().isEqual(lastCake.getBirthDay())){
-                throw new BaseException(ErrorCode.ALREADY_EXIST_CAKE);
+                throw AlreadyExistCakeException.getInstance();
             }
         }
         cakeRepository.save(Cake.builder()
@@ -56,7 +61,7 @@ public class CakeService {
     @Transactional
     public ReadUserCakeListResponse readMyCake() {
         if(authenticationFacade.getCurrentUser() == null){
-            throw new BaseException(ErrorCode.FORBIDDEN);
+            throw ForbiddenException.getInstance();
         }
         User user = authenticationFacade.getCurrentUser();
         return ReadUserCakeListResponse.builder()
@@ -74,7 +79,7 @@ public class CakeService {
     @Transactional
     public ReadCakeDetailsResponse readCakeDetails(Long cakeId) {
         Cake cake = cakeRepository.findById(cakeId)
-         .orElseThrow(() -> new BaseException(ErrorCode.NOT_FOUND_CAKE));
+         .orElseThrow(NotFoundCakeException::getInstance);
         return ReadCakeDetailsResponse.builder()
                 .id(cake.getId())
                 .birthDay(cake.getBirthDay())

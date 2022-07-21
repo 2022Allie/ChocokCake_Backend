@@ -8,5 +8,4 @@ import java.util.List;
 @Repository
 public interface CandleRepository extends JpaRepository<Candle, Long> {
     List<Candle> findByCake(Cake cake);
-    void deleteCandlesByCake(Cake cake);
 }
