@@ -16,11 +16,13 @@ import com.example.chocokcake.global.error.exception.PasswordNotMatchedException
 import com.example.chocokcake.global.security.JwtTokenProvider;
 import com.example.chocokcake.global.security.auth.AuthenticationFacade;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {
