@@ -28,9 +28,6 @@ public class CandleService {
     private final AuthenticationFacade authenticationFacade;
     private final CandleRepository candleRepository;
     public CandleListResponse getCandleList(Long id) {
-        if(authenticationFacade.getCurrentUser() == null) {
-            throw UnAuthorizedTokenException.getInstance();
-        }
         Cake cake = cakeRepository.findById(id)
                 .orElseThrow(NotFoundCakeException::getInstance);
         if(authenticationFacade.getCurrentUser() != cake.getUser()){
