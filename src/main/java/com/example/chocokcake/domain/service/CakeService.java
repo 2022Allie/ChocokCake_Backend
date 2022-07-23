@@ -13,6 +13,7 @@ import com.example.chocokcake.global.error.exception.AlreadyExistCakeException;
 import com.example.chocokcake.global.error.exception.ForbiddenException;
 import com.example.chocokcake.global.security.auth.AuthenticationFacade;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,6 +22,7 @@ import java.time.Month;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CakeService {
