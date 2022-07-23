@@ -14,14 +14,12 @@ import com.example.chocokcake.global.error.exception.AlreadyBirthdayLaterExcepti
 import com.example.chocokcake.global.error.exception.UnAuthorizedTokenException;
 import com.example.chocokcake.global.security.auth.AuthenticationFacade;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.stream.Collectors;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CandleService {
