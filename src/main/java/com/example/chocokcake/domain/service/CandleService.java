@@ -26,19 +26,6 @@ public class CandleService {
     private final CakeRepository cakeRepository;
     private final AuthenticationFacade authenticationFacade;
     private final CandleRepository candleRepository;
-    public CandleListResponse getCandleList(Long id) {
-        Cake cake = cakeRepository.findById(id)
-                .orElseThrow(NotFoundCakeException::getInstance);
-        return CandleListResponse.builder()
-                .candles(candleRepository.findByCake(cake).stream()
-                        .map(candle -> CandleResponse.builder()
-                                .id(candle.getId())
-                                .postman(candle.getPostman())
-                                .theme(candle.getTheme())
-                                .build())
-                        .collect(Collectors.toList()))
-                .build();
-    }
 
     @Transactional
     public MessageResponse postLetter(Long id, LetterRequest request) {
@@ -74,6 +61,20 @@ public class CandleService {
                 .letter(candle.getLetter())
                 .postman(candle.getPostman())
                 .theme(candle.getTheme())
+                .build();
+    }
+    
+    public CandleListResponse getCandleList(Long id) {
+        Cake cake = cakeRepository.findById(id)
+                .orElseThrow(NotFoundCakeException::getInstance);
+        return CandleListResponse.builder()
+                .candles(candleRepository.findByCake(cake).stream()
+                        .map(candle -> CandleResponse.builder()
+                                .id(candle.getId())
+                                .postman(candle.getPostman())
+                                .theme(candle.getTheme())
+                                .build())
+                        .collect(Collectors.toList()))
                 .build();
     }
 }
