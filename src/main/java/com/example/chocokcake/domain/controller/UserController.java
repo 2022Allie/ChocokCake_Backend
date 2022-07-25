@@ -38,10 +38,4 @@ public class UserController {
     public MessageResponse withdrawal(@RequestBody LoginRequest request){
         return userService.withdrawal(request);
     }
-    @GetMapping("/test")
-    public MessageResponse test(){
-        return MessageResponse.builder()
-                .message("test")
-                .build();
-    }
 }
