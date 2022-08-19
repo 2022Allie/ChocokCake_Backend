@@ -13,7 +13,3 @@ spring:
 auth:
   jwt:
     secret: ${SECRET}
-cloud:
-  aws:
-    region:
-      auto: false
