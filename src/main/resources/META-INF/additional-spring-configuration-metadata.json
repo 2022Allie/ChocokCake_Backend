@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "cloud.aws.region.auto",
+      "type": "java.lang.Boolean",
+      "description": "Description for cloud.aws.region.auto."
+  }
+] }
