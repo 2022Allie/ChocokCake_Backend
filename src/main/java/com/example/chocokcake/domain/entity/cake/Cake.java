@@ -11,7 +11,7 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-@Table
+@Table(name = "cake")
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

@@ -2,7 +2,7 @@ spring:
   jackson:
     property-naming-strategy: SNAKE_CASE
   datasource:
-    url: ${DBURL}
+    url: ${DB_URL}
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: ${PASSWORD}
     username: ${NAME}
