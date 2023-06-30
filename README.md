@@ -1,5 +1,6 @@
 # 👋 Welcom ChocokCake_Backend 🎂
-![image](https://github.com/2022Allie/ChocokCake_Backend/assets/101314072/7dbfba85-9d44-4f50-9ad3-7119445a54b5)
+![image](https://github.com/2022Allie/ChocokCake_Backend/assets/101314072/a2ad16fb-ed70-4611-a5ff-0bbb10ec46c5)
+
 
 <br>
 
